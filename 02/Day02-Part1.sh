@@ -1,3 +1,5 @@
+#!/bin/env bash
+
 cat << EOF > chal
 ubkfmdjxyzlbgkrotcepvswaqx
 uikfmdkuyzlbgerotcepvswaqh
