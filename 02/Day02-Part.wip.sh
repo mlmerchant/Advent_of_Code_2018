@@ -1,5 +1,3 @@
-#!/bin/env bash
-
 cat << EOF > chal
 ubkfmdjxyzlbgkrotcepvswaqx
 uikfmdkuyzlbgerotcepvswaqh
@@ -254,10 +252,13 @@ uikfmdjxuzlbgnrotcepvsvaqc
 EOF
 
 max_match_string="BROKEN"
-max_match_string=0
+max_match_size=0
 
 while read -r line1; do
     while read -r line2; do
+        if [[ $line1 == $line2 ]]; then
+            continue 
+        fi
         matches_this_line=0
         match_string_this_line=""
         for i in $(seq 0 $((${#line} - 1))); do
@@ -266,11 +267,11 @@ while read -r line1; do
                 match_string_this_line=$match_string_this_line + ${line1:i:1}
             fi
         done
-        if [[ $matches_this_line -gt  $max_match_string ]]; then
-            max_match_string=$matches_this_line
+        if [[ $matches_this_line -gt  $max_match_size ]]; then
+            max_match_size=$matches_this_line
             max_match_string=$match_string_this_line
         fi
     done < chal
 done < chal
 
-echo $max_match_string
+echo Answer is $max_match_string
